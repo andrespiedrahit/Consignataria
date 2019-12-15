@@ -1,0 +1,22 @@
+JOYA
+  remoto:  https: / /rubygems.org/
+  especificaciones:
+    Mustermann ( 1.0 . 2 )
+    rejilla ( 2.0 . 5 )
+    cremallera - protección ( 2.0 . 1 )
+      estante
+    sinatra ( 2.0 . 1 )
+      Mustermann ( ~ >  1.0 )
+      estante ( ~ >  2.0 )
+      rack - protección ( =  2.0 . 1 )
+      inclinación ( ~ >  2.0 )
+    inclinar ( 2.0 . 8 )
+
+PLATAFORMAS
+  rubí
+
+Dependencias
+  sinatra
+
+INCLUIDO  CON
+   1.16 . 1
