@@ -1,23 +1,12 @@
-sudo : falso
-trabajos :
-  incluyen :
-    - etapa : pruebas unitarias
-      guión : echo one
-    - etapa : pruebas unitarias
-      guión : echo two
-    - etapa : despliegue a puesta en escena
-      guión : omitir
-      desplegar : & heroku
-        proveedor : heroku
-        aplicación : sf-stage-staging
-        api_key : $ HEROKU_AUTH_TOKEN
-        en : sf-stage-demo
-    - etapa : puesta en escena de prueba
-      script : ' curl http://sf-stages-staging.herokuapp.com '
-    - etapa : despliegue a producción
-      script : / bin / true
-      desplegar :
-        << : * heroku
-        aplicación : sf-stage-production
-    - etapa : prueba de producción
-      script : ' curl http://sf-stages-production.herokuapp.com '
+jobs:
+  include:
+    - script: echo "Running unit tests (1)"
+    - script: echo "Running unit tests (2)"
+    - stage: GitHub Release
+      script: echo "Deploying to GitHub releases ..."
+      deploy:
+        provider: releases
+        api_key: $GITHUB_OAUTH_TOKEN
+        skip_cleanup: true
+        on:
+          tags: true
