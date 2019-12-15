@@ -1,11 +1,11 @@
-language: php
-php:
-  - 7.1.9
 jobs:
   include:
     - stage: test
       script: ./test 1
-    - # stage name not required, will continue to use `test`
+      language: php  
+      php: 
+        - 7.1.9
+    - No se requiere el nombre de la etapa #, continuará usando `test`
       script: ./test 2
     - stage: deploy
       script: ./deploy
