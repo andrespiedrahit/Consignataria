@@ -1,11 +1,38 @@
 idioma : php
-php :
-  - 5.7
-   - hhvm # on Trusty only
-  - nightly
 
-before_script:
-  - curl -sSfL -o ~/.phpenv/versions/hhvm/bin/phpunit https://phar.phpunit.de/phpunit-5.7.phar
+php :
+  - 7.3
+  - 7.4 instantánea
+  - todas las noches
+
+matriz :
+  allow_failures :
+    - php : todas las noches
+  fast_finish : true
+
+env :
+  matriz :
+    - DEPENDENCIAS = "alto"
+    - DEPENDENCIAS = "bajo"
+  global :
+    - DEFAULT_COMPOSER_FLAGS = "- sin interacción --no-ansi --no-progress --no -gerir"
+
+antes_instalar :
+  - ./tools/composer clear-cache
+
+instalar :
+  - if [["$ DEPENDENCIES" = 'alto']]; luego travis_retry ./tools/composer update $ DEFAULT_COMPOSER_FLAGS; fi
+  - if [["$ DEPENDENCIES" = 'bajo']]; luego travis_retry ./tools/composer update $ DEFAULT_COMPOSER_FLAGS --prefer-lower; fi
+
+before_script :
+  - echo 'zend.assertions = 1' >> ~ / .phpenv / version / $ (phpenv version-name) /etc/conf.d/travis.ini
+  - echo 'afirmar.excepción = Encendido' >> ~ / .phpenv / versiones / $ (phpenv version-name) /etc/conf.d/travis.ini
 
 guión :
-  - vendedor / bin / phpunit
+  - ./phpunit --coverage-clover = coverage.xml
+
+after_success :
+  - bash <(curl -s https://codecov.io/bash)
+
+notificaciones :
+  correo electrónico : falso
