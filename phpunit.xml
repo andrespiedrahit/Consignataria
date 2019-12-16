@@ -1,0 +1,32 @@
+<? versión xml = " 1.0 " codificación = " UTF-8 " ?>
+< phpunit  xmlns : xsi = " http://www.w3.org/2001/XMLSchema-instance "
+         xsi : noNamespaceSchemaLocation = " phpunit.xsd "
+         bootstrap = " tests / bootstrap.php "
+         colores = " verdadero "
+         detallado = " verdadero " >
+    < testuites >
+        < testuite  name = " unit " >
+            < directorio > pruebas / unidad </ directorio >
+        </ testuite >
+
+        < testuite  name = "de extremo a extremo " >
+            < directorio  sufijo = " .phpt " > pruebas / extremo a extremo </ directorio >
+            < exclude > pruebas / de extremo a extremo / _files </ exclude >
+        </ testuite >
+    </ testsuites >
+
+    < filtro >
+        <proceso de lista  blancaUncoveredFilesFromWhitelist = " true " >
+            < directorio  sufijo = " .php " > src </ directorio >
+            < excluir >
+                < archivo > src / Framework / Assert / Functions.php </ archivo >
+                < archivo > src / Util / PHP / eval-stdin.php </ archivo >
+            </ excluir >
+        </ lista blanca >
+    </ filter >
+
+    < php >
+        < const  name = " PHPUNIT_TESTSUITE "  value = " true " />
+    </ php >
+</ phpunit >
+© 2019 GitHub, Inc.
