@@ -1,4 +1,38 @@
-jobs:
+language: php
+php:
+  - '5.4'
+  - '5.7'
+  - '7.0'
+  - hhvm # on Trusty only
+  - nightly
+services:
+  - docker
+# Config file for https://travis-ci.org/
+
+
+# Note: Code coverage requires php-xDebug extension enabled on CI server
+
+install:
+- travis_retry composer install --no-interaction --no-suggest
+
+# Testing the app (see phpunit.xml) for configs, generating Code Coverage report
+
+# skip installation step
+install: true
+
+cache:
+   directories:
+      - $HOME/.m2
+# Monitor only these branches
+branches:
+  only:
+  - master
+  
+script:
+   - mvn -f Consignataria/nbproject/project.xml clean verify -Pdocker
+   notification:
+  email:  bapiedrahita3@misena.edu.co
+  jobs:
   include:
     - script: ./test 1 # uses the default stage name "test"
     - script: ./test 2
