@@ -1,38 +1,29 @@
-idioma : php
+services:
+  - docker
+# Config file for https://travis-ci.org/
 
-php :
-  - 7.3
-  - 7.4 instantánea
-  - todas las noches
+language: php
 
-matriz :
-  allow_failures :
-    - php : todas las noches
-  fast_finish : true
+# Note: Code coverage requires php-xDebug extension enabled on CI server
 
-env :
-  matriz :
-    - DEPENDENCIAS = "alto"
-    - DEPENDENCIAS = "bajo"
-  global :
-    - DEFAULT_COMPOSER_FLAGS = "- sin interacción --no-ansi --no-progress --no -gerir"
+install:
+- travis_retry composer install --no-interaction --no-suggest
 
-antes_instalar :
-  - ./tools/composer clear-cache
+# Testing the app (see phpunit.xml) for configs, generating Code Coverage report
 
-instalar :
-  - if [["$ DEPENDENCIES" = 'alto']]; luego travis_retry ./tools/composer update $ DEFAULT_COMPOSER_FLAGS; fi
-  - if [["$ DEPENDENCIES" = 'bajo']]; luego travis_retry ./tools/composer update $ DEFAULT_COMPOSER_FLAGS --prefer-lower; fi
+# skip installation step
+install: true
 
-before_script :
-  - echo 'zend.assertions = 1' >> ~ / .phpenv / version / $ (phpenv version-name) /etc/conf.d/travis.ini
-  - echo 'afirmar.excepción = Encendido' >> ~ / .phpenv / versiones / $ (phpenv version-name) /etc/conf.d/travis.ini
+cache:
+   directories:
+      - $HOME/.m2
+# Monitor only these branches
+branches:
+  only:
+  - master
+  
+script:
+   - mvn -f Consignataria/nbproject/project.xml clean verify -Pdocker
+   notification:
+  email:  bapiedrahita3@misena.edu.co
 
-guión :
-  - ./phpunit --coverage-clover = coverage.xml
-
-after_success :
-  - bash <(curl -s https://codecov.io/bash)
-
-notificaciones :
-  correo electrónico : falso
