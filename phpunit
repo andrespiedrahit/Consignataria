@@ -1,0 +1,48 @@
+#! / usr / bin / env php
+<? php declare ( strictly_types = 1 ); 
+/ *
+ * Este archivo es parte de PHPUnit.
+ * *
+ * (c) Sebastian Bergmann <sebastian@phpunit.de>
+ * *
+ * Para la información completa de derechos de autor y licencia, consulte la LICENCIA
+ * archivo que se distribuyó con este código fuente.
+ * /
+if ( version_compare ( ' 7.3.0 ' , PHP_VERSION , ' > ' )) {
+    fwrite (
+        STDERR ,
+        sprintf (
+            ' Esta versión de PHPUnit es compatible con PHP 7.3, PHP 7.4 y PHP 8.0. '  .  PHP_EOL  .
+            ' Estás utilizando PHP% s (% s). '  .  PHP_EOL ,
+            PHP_VERSION ,
+            PHP_BINARIO
+        )
+    );
+    morir ( 1 );
+}
+if ( ! ini_get ( ' date.timezone ' )) {
+    ini_set ( ' date.timezone ' , ' UTC ' );
+}
+foreach ( array ( __DIR__  .  ' /../../autoload.php ' , __DIR__  .  ' /../vendor/autoload.php ' , __DIR__  .  ' /vendor/autoload.php ' ) como  $ file ) {
+    if ( file_exists ( $ archivo )) {
+        define ( ' PHPUNIT_COMPOSER_INSTALL ' , $ archivo );
+        romper ;
+    }
+}
+sin establecer ( $ archivo );
+if ( ! define ( ' PHPUNIT_COMPOSER_INSTALL ' )) {
+    fwrite (
+        STDERR ,
+        ' Necesita configurar las dependencias del proyecto usando Composer: '  .  PHP_EOL  .  PHP_EOL  .
+        '     instalación del compositor '  .  PHP_EOL  .  PHP_EOL  .
+        ' Puede aprender todo sobre Composer en https://getcomposer.org/. '  .  PHP_EOL
+    );
+    morir ( 1 );
+}
+$ opciones  =  getopt ( ' ' , array ( ' prepend: ' ));
+if ( isset ( $ opciones [ ' prepend ' ])) {
+    requerir  $ opciones [ ' anteponer ' ];
+}
+sin configurar ( $ opciones );
+requiere  PHPUNIT_COMPOSER_INSTALL ;
+PHPUnit \ TextUI \ Command :: main ();
