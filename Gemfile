@@ -1,7 +1,20 @@
-source 'https://rubygems.org'
-
-gem 'sinatra'
-
-group :production do
-  gem 'rack-perftools-profiler'
-end
+bundle install [--binstubs [= DIRECTORIO]]
+                 [--limpiar]
+                 [--despliegue]
+                 [--fuerza]
+                 [--congelado]
+                 [--full-index]
+                 [--gemfile = GEMFILE]
+                 [--jobs = NÚMERO]
+                 [--local]
+                 [--no-cache]
+                 [- no podar]
+                 [--path PATH]
+                 [--tranquilo]
+                 [--retry = NUMBER]
+                 [--el asunto]
+                 [- independiente [= GRUPO [GRUPO ...]]]
+                 [--sistema]
+                 [--trust-policy = POLÍTICA]
+                 [--with = GROUP [GROUP ...]]
+                 [--without = GROUP [GROUP ...]]
