@@ -1,3 +1,4 @@
 source 'https://rubygems.org'
 
-gem 'sinatra'
+gem 'actionpack', '3.0.0.rc'
+gem 'activemerchant'
